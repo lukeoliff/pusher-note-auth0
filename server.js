@@ -35,18 +35,16 @@ function loggedIn(req, res, next){
 
 app.get('/login', 
   passport.authenticate('auth0', {
-    clientID: 'hEaTPoVz7pP-kfcbIwcCM5hLWcSRn4hS',
-    domain: 'gson007.auth0.com',
+    clientID: 'YOUR AUTH0 CLIENT ID',
+    domain: 'YOUR AUTH0 DOMAIN',
     redirectUri: 'http://localhost:3000/callback',
-    audience: 'https://gson007.auth0.com/userinfo',
+    audience: 'https://YOUR AUTH0 DOMAIN/userinfo',
     responseType: 'code',
     scope: 'openid profile'
   })
 )
 
-app.get('/callback',
-  passport.authenticate('auth0'),
-  (req, res) => {
+app.get('/callback', passport.authenticate('auth0'), (req, res) => {
     req.session.user = req.user;
     res.redirect('/')
 })
